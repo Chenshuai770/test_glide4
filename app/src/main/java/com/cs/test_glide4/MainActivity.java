@@ -1,6 +1,5 @@
 package com.cs.test_glide4;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -68,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
             "http://pic19.nipic.com/20120324/3484432_092618805000_2.jpg"
     };
     private MyAdapter adapter;
-    private Context context;
     private List<String > mDatas=new ArrayList<>();
     private List<Integer> mHeight=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +89,18 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter=new MyAdapter(MainActivity.this,mDatas,mHeight);
         recyclerview.setAdapter(adapter);
+
         adapter.setOnItemClickLitener(new MyAdapter.OnItemClickLitener() {
            @Override
            public void onItemClick(View view, int position) {
                //Toast.makeText(MainActivity.this, position+"g", Toast.LENGTH_SHORT).show();
                Intent intent=new Intent(MainActivity.this,Photoview.class);
-               String url = URLs[position];
-               intent.putExtra("url",url);
+
+               Bundle bundle = new Bundle();
+               bundle.putInt("pos",position);
+
+               bundle.putStringArray("cs",URLs);
+               intent.putExtras(bundle);
                startActivity(intent);
            }
        });
