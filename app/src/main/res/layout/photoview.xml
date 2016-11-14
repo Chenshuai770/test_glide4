@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#060606">
 
     <uk.co.senab.photoview.PhotoView
@@ -9,13 +10,13 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true" />
-
     <ProgressBar
-        android:id="@+id/pb_progress"
-        style="@android:style/Widget.ProgressBar.Large"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:indeterminateDuration="3000"
-        />
-</FrameLayout>
+
+        android:id="@+id/progress"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+</RelativeLayout>

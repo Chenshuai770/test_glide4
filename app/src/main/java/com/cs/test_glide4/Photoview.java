@@ -30,8 +30,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class Photoview extends Activity  {
 
 
-    private PhotoView photoView;
-    private ProgressBar mProgressBar;
+
     private ViewPager viewPager;
     private int[] images={R.mipmap.a,R.mipmap.b,R.mipmap.c,R.mipmap.d};
     private String[] img;
@@ -116,27 +115,31 @@ public class Photoview extends Activity  {
 
         for (int i = 0; i < datas.length; i++) {
             View view = inflater.inflate(R.layout.photoview, null);
-            photoView= (PhotoView) view.findViewById(R.id.pv_photo);
-            mProgressBar= (ProgressBar) view.findViewById(R.id.pb_progress);
-            mProgressBar.setVisibility(View.GONE);
+            PhotoView photoView = (PhotoView) view.findViewById(R.id.pv_photo);
+            final ProgressBar mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
 
             Glide.with(Photoview.this)
                     .load(datas[i])
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            mProgressBar.setVisibility(View.GONE);
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                            // 这里可以设置进度条是否可见
+                            mProgressBar.setVisibility(View.GONE);
+                           // Toast.makeText(Photoview.this, "我加载成功了", Toast.LENGTH_SHORT).show();
                             return false;
 
 
                         }
                     })
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .crossFade()
+
                     .into(photoView);
             photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
                 @Override
