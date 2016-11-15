@@ -67,6 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHodler> {
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
+                .crossFade()
                 .into(holder.imageView);
         if (mOnItemClickLitener!=null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
